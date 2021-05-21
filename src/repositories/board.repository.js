@@ -8,9 +8,9 @@ export const create = async (body) => {
 		return newBoard;
 	} catch (error) {
 		throw new AppError({
-			message: 'Could not create board',
+			message: Object.keys(error.keyValue) || 'Could not create board',
 			type: 'Board-Create',
-			status: 500,
+			status: Object.keys(error.keyValue).length > 0 ? 400 : 500,
 		});
 	}
 };
