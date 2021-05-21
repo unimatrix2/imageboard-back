@@ -32,4 +32,4 @@ app.use('/api', routes);
 mongoConnection(process.env.MONGODB_LOCAL_URL);
 
 // Server Start
-app.listen(process.env.PORT, () => console.log(`App running on PORT ${process.env.PORT}`));
+app.listen(process.env.PORT, () => process.stdout.write(`App running on PORT ${process.env.PORT}\n`));
