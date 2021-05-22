@@ -29,3 +29,19 @@ export const get = async (abbr) => {
 		});
 	}
 };
+
+export const list = async () => {
+	try {
+		const boards = await Board.find();
+		console.log(boards);
+			/* .populate('founder', { nick: 1, _id: 0 })
+			.populate('modmins', { nick: 1, _id: 0 }); */
+		return boards;
+	} catch (error) {
+		throw new AppError({
+			message: 'Could not retrieve board list',
+			type: 'Board-List',
+			status: 500,
+		});
+	}
+};

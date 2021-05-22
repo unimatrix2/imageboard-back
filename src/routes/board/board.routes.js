@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getBoard, createBoard } from '../../services/board.service';
+import { getBoard, createBoard, listBoards } from '../../services/board.service';
 import { verifyToken } from '../../utils/passwordManager';
 
 const router = Router();
@@ -21,7 +21,17 @@ router.post('/create', async (req, res) => {
 		const newBoard = await createBoard({ ...body, founder: founder.id, modmins: [founder.id] });
 		res.status(200).json(newBoard);
 	} catch (error) {
-		res.status(500).json(error);
+		res.status(error.status).json(error);
+	}
+});
+
+router.get('/list', async (req, res) => {
+	try {
+		const boards = await listBoards();
+		console.log(boards);
+		res.status(200).json(boards);
+	} catch (error) {
+		res.status(error.status).json(error);
 	}
 });
 
