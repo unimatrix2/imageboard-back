@@ -20,8 +20,7 @@ export const get = async (abbr) => {
 		const board = await Board.findOne({ abbr }, ['abbr', 'title', 'description', 'rules'])
 			.populate('founder', { nick: 1, _id: 0 })
 			.populate('modmins', { nick: 1, _id: 0 });
-		console.log(board);
-		return;
+		return board;
 	} catch (error) {
 		throw new AppError({
 			message: 'Board does not exist',
